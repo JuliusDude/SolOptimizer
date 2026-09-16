@@ -14,6 +14,8 @@ import {
   WizardState,
   INITIAL_WIZARD_STATE,
   toSolarEstimatorInput,
+  isStepValid,
+  getMaxReachableStep,
 } from "@/lib/estimator/store";
 import { calculateSolarEstimate } from "@/lib/solar/calculator";
 import StepProperty from "./StepProperty";
@@ -58,8 +60,12 @@ export default function WizardShell() {
     }
   }, [state]);
 
+  const maxReachable = getMaxReachableStep(state);
+
   const handleNext = () => {
-    setState((prev) => ({ ...prev, step: Math.min(prev.step + 1, 6) }));
+    if (isStepValid(state.step, state)) {
+      setState((prev) => ({ ...prev, step: Math.min(prev.step + 1, 6) }));
+    }
   };
 
   const handleBack = () => {
@@ -67,7 +73,10 @@ export default function WizardShell() {
   };
 
   const handleGoToStep = (stepNumber: number) => {
-    setState((prev) => ({ ...prev, step: stepNumber }));
+    // Cannot skip ahead to steps if preceding steps aren't valid
+    if (stepNumber <= maxReachable || stepNumber < state.step) {
+      setState((prev) => ({ ...prev, step: stepNumber }));
+    }
   };
 
   const handleCalculate = async () => {
@@ -114,13 +123,17 @@ export default function WizardShell() {
             const Icon = stepItem.icon;
             const isCompleted = state.step > stepItem.id;
             const isCurrent = state.step === stepItem.id;
+            const isClickable = stepItem.id <= maxReachable || stepItem.id <= state.step;
 
             return (
               <React.Fragment key={stepItem.id}>
                 <button
                   type="button"
+                  disabled={!isClickable}
                   onClick={() => handleGoToStep(stepItem.id)}
-                  className="flex flex-col items-center group focus:outline-none"
+                  className={`flex flex-col items-center group focus:outline-none transition ${
+                    !isClickable ? "opacity-35 cursor-not-allowed" : "cursor-pointer"
+                  }`}
                 >
                   <div
                     className={`flex h-10 w-10 items-center justify-center rounded-lg border-2 transition-all ${

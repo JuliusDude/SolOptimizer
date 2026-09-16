@@ -92,6 +92,39 @@ export const INITIAL_WIZARD_STATE: WizardState = {
   },
 };
 
+export function isStepValid(stepNumber: number, state: WizardState): boolean {
+  switch (stepNumber) {
+    case 1:
+      return Boolean(state.location?.city && state.location.city.trim().length >= 2);
+    case 2:
+      return Boolean(state.roof?.areaSqFt && state.roof.areaSqFt > 0);
+    case 3:
+      return Boolean(state.roof?.orientation && state.roof?.shading);
+    case 4:
+      return Boolean(
+        state.electricity?.monthlyBillINR !== undefined &&
+        state.electricity.monthlyBillINR >= 0 &&
+        state.electricity?.tariffINRPerKWh &&
+        state.electricity.tariffINRPerKWh > 0
+      );
+    case 5:
+      return Boolean(state.system?.costPerKW && state.system.costPerKW > 0);
+    case 6:
+      return true;
+    default:
+      return true;
+  }
+}
+
+export function getMaxReachableStep(state: WizardState): number {
+  for (let i = 1; i <= 5; i++) {
+    if (!isStepValid(i, state)) {
+      return i;
+    }
+  }
+  return 6;
+}
+
 export function toSolarEstimatorInput(state: WizardState): SolarEstimatorInput {
   return {
     location: state.location,
