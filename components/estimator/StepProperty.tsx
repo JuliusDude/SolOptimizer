@@ -1,8 +1,7 @@
-"use client";
-
-import React, { useState } from "react";
-import { MapPin, Navigation, Sun, CheckCircle2, AlertTriangle } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { MapPin, Navigation, Sun, CheckCircle2, AlertTriangle, Radio } from "lucide-react";
 import { PropertyLocation } from "@/lib/solar/types";
+import { fetchSolarResourceForLocation, LiveSolarResource } from "@/lib/solar/api";
 import { getSolarResourceForLocation } from "@/lib/solar/assumptions";
 
 interface StepPropertyProps {
@@ -29,12 +28,44 @@ export default function StepProperty({
   onNext,
 }: StepPropertyProps) {
   const [isLocating, setIsLocating] = useState(false);
+  const [isLoadingSolar, setIsLoadingSolar] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-
-  const solarResource = getSolarResourceForLocation(
-    location.city,
-    location.state
+  const [liveResource, setLiveResource] = useState<LiveSolarResource>(() =>
+    getSolarResourceForLocation(location.city, location.state)
   );
+
+  // Dynamically fetch exact live solar irradiance for GPS or city
+  useEffect(() => {
+    let isMounted = true;
+    setIsLoadingSolar(true);
+
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetchSolarResourceForLocation(
+          location.city,
+          location.state,
+          location.latitude,
+          location.longitude
+        );
+        if (isMounted) {
+          setLiveResource(res);
+        }
+      } catch (e) {
+        if (isMounted) {
+          setLiveResource(getSolarResourceForLocation(location.city, location.state));
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoadingSolar(false);
+        }
+      }
+    }, 300);
+
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
+  }, [location.city, location.state, location.latitude, location.longitude]);
 
   const handleUseCurrentLocation = () => {
     if (!navigator.geolocation) {
@@ -274,18 +305,34 @@ export default function StepProperty({
       <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4">
         <div className="flex items-start space-x-3">
           <div className="rounded-lg bg-amber-500/10 p-2 text-amber-500">
-            <Sun className="h-5 w-5" />
+            <Sun className={`h-5 w-5 ${isLoadingSolar ? "animate-spin" : ""}`} />
           </div>
-          <div>
-            <h4 className="text-sm font-semibold text-white">
-              Solar Resource for {location.city || "Selected Area"}
-            </h4>
-            <p className="mt-0.5 text-xs text-slate-400">
-              Estimated Peak Sun Hours:{" "}
-              <strong className="text-white">
-                {solarResource.peakSunHours} kWh/m²/day
-              </strong>{" "}
-              <span className="opacity-70">(Source: {solarResource.source})</span>
+          <div className="flex-1">
+            <div className="flex items-center space-x-2">
+              <h4 className="text-sm font-semibold text-white">
+                Solar Irradiance for {location.city || "Selected Area"}
+              </h4>
+              {liveResource.isLive && (
+                <span className="inline-flex items-center space-x-1 rounded bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 text-[10px] font-bold text-emerald-400">
+                  <Radio className="h-3 w-3 animate-pulse" />
+                  <span>LIVE SATELLITE</span>
+                </span>
+              )}
+            </div>
+            <p className="mt-1 text-xs text-slate-400">
+              {isLoadingSolar ? (
+                <span>Fetching live irradiance from Global Solar Atlas / NASA satellite grid...</span>
+              ) : (
+                <>
+                  Peak Sun Hours:{" "}
+                  <strong className="text-white font-mono text-sm">
+                    {liveResource.peakSunHours} kWh/m²/day
+                  </strong>{" "}
+                  <span className="opacity-75 block sm:inline mt-0.5 sm:mt-0">
+                    • Source: {liveResource.source}
+                  </span>
+                </>
+              )}
             </p>
           </div>
         </div>

@@ -70,10 +70,27 @@ export default function WizardShell() {
     setState((prev) => ({ ...prev, step: stepNumber }));
   };
 
-  const handleCalculate = () => {
+  const handleCalculate = async () => {
     setIsCalculating(true);
     const input = toSolarEstimatorInput(state);
-    const result = calculateSolarEstimate(input, state.customAssumptions);
+
+    let resolvedAssumptions = { ...state.customAssumptions };
+    try {
+      const { fetchSolarResourceForLocation } = await import("@/lib/solar/api");
+      const liveData = await fetchSolarResourceForLocation(
+        input.location.city,
+        input.location.state,
+        input.location.latitude,
+        input.location.longitude
+      );
+      if (liveData?.peakSunHours) {
+        resolvedAssumptions.peakSunHoursPerDay = liveData.peakSunHours;
+      }
+    } catch (e) {
+      console.warn("Could not retrieve live solar resource on calculate, using defaults", e);
+    }
+
+    const result = calculateSolarEstimate(input, resolvedAssumptions);
 
     // Save calculation bundle to sessionStorage for results page
     sessionStorage.setItem(
