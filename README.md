@@ -1,0 +1,2 @@
+# SolOptimizer
+Solar Panel Optimizer 
