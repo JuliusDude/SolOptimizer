@@ -23,7 +23,12 @@ export default function StepElectricity({
       ? Math.round((electricity.monthlyBillINR / electricity.monthlyConsumptionKWh) * 100) / 100
       : null;
 
-  const isValid = electricity.monthlyBillINR >= 0 && electricity.tariffINRPerKWh > 0;
+  const isValid = Boolean(
+    electricity.monthlyBillINR &&
+    electricity.monthlyBillINR > 0 &&
+    electricity.tariffINRPerKWh &&
+    electricity.tariffINRPerKWh > 0
+  );
 
   return (
     <div className="space-y-6">

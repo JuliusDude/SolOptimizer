@@ -63,24 +63,22 @@ export interface WizardState {
 export const INITIAL_WIZARD_STATE: WizardState = {
   step: 1,
   location: {
-    city: "Belagavi",
-    state: "Karnataka",
+    city: "",
+    state: "",
     country: "India",
-    latitude: 15.8497,
-    longitude: 74.4977,
     source: "manual",
   },
   roof: {
-    areaSqFt: 1200,
-    areaSqM: 111.48,
+    areaSqFt: 0,
+    areaSqM: 0,
     measurementMethod: "manual",
-    orientation: "southEast",
-    shading: "low",
+    orientation: "south" as RoofOrientation,
+    shading: "low" as ShadingLevel,
   },
   electricity: {
-    monthlyBillINR: 3500,
-    monthlyConsumptionKWh: 450,
-    tariffINRPerKWh: 8.5,
+    monthlyBillINR: 0,
+    monthlyConsumptionKWh: undefined,
+    tariffINRPerKWh: 8.0,
     isCustomTariff: false,
   },
   system: {
@@ -102,8 +100,8 @@ export function isStepValid(stepNumber: number, state: WizardState): boolean {
       return Boolean(state.roof?.orientation && state.roof?.shading);
     case 4:
       return Boolean(
-        state.electricity?.monthlyBillINR !== undefined &&
-        state.electricity.monthlyBillINR >= 0 &&
+        state.electricity?.monthlyBillINR &&
+        state.electricity.monthlyBillINR > 0 &&
         state.electricity?.tariffINRPerKWh &&
         state.electricity.tariffINRPerKWh > 0
       );
