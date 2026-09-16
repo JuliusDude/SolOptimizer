@@ -46,12 +46,63 @@ export default function StepProperty({
     setErrorMsg(null);
 
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+      async (position) => {
         const { latitude, longitude } = position.coords;
+        let detectedCity = location.city;
+        let detectedState = location.state || "";
+        let detectedCountry = "India";
+
+        try {
+          const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
+          if (mapboxToken) {
+            const res = await fetch(
+              `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?types=place,region,country,locality&access_token=${mapboxToken}`
+            );
+            if (res.ok) {
+              const data = await res.json();
+              if (data.features && data.features.length > 0) {
+                for (const f of data.features) {
+                  if (f.place_type.includes("place") || f.place_type.includes("locality")) {
+                    if (!detectedCity || detectedCity === "") detectedCity = f.text;
+                  }
+                  if (f.place_type.includes("region")) {
+                    if (!detectedState || detectedState === "") detectedState = f.text;
+                  }
+                  if (f.place_type.includes("country")) {
+                    detectedCountry = f.text;
+                  }
+                }
+                if (!detectedCity && data.features[0]) {
+                  detectedCity = data.features[0].text;
+                }
+              }
+            }
+          }
+
+          // Fallback to OpenStreetMap Nominatim if mapbox didn't resolve city
+          if (!detectedCity) {
+            const osmRes = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10`
+            );
+            if (osmRes.ok) {
+              const osmData = await osmRes.json();
+              const addr = osmData.address || {};
+              detectedCity = addr.city || addr.town || addr.municipality || addr.village || addr.county || detectedCity;
+              detectedState = addr.state || detectedState;
+              detectedCountry = addr.country || detectedCountry;
+            }
+          }
+        } catch (geoErr) {
+          console.warn("Reverse geocoding failed, keeping coordinates only", geoErr);
+        }
+
         onChange({
           ...location,
           latitude,
           longitude,
+          city: detectedCity || location.city,
+          state: detectedState || location.state,
+          country: detectedCountry || location.country || "India",
           source: "current_location",
         });
         setIsLocating(false);
