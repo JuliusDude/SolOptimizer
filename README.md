@@ -47,6 +47,11 @@ Unlike generic solar calculators that provide unexplained numbers, SolOptimizer 
    - Latest estimate highlight summary.
    - Individual estimate analysis detail view (`/dashboard/estimates/[id]`).
 
+4. **Modern UI/UX:**
+   - **Dark Theme Redesign:** Fully immersive dark mode for reduced eye strain and a modern aesthetic.
+   - **Watermelon UI Integration:** Leverages sleek, accessible components from the Watermelon UI library.
+   - **Refined Interface:** Cleaned up the design by removing legacy pills in favor of a cleaner, more streamlined layout.
+
 ---
 
 ## 3. Tech Stack
@@ -54,7 +59,7 @@ Unlike generic solar calculators that provide unexplained numbers, SolOptimizer 
 | Layer | Technology |
 |---|---|
 | **Framework** | Next.js 14 (App Router) + React 18 + TypeScript |
-| **Styling** | Tailwind CSS + Lucide Icons |
+| **Styling** | Tailwind CSS + Watermelon UI + Lucide Icons (Dark Theme Native) |
 | **Maps & Geodesy** | Mapbox GL JS + `@mapbox/mapbox-gl-draw` + Turf.js |
 | **Charts** | Recharts (Area, Line, Bar, Composed) |
 | **Validation** | Zod |
