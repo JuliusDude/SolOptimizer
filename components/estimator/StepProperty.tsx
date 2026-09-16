@@ -213,7 +213,7 @@ export default function StepProperty({
           <Navigation className={`h-4 w-4 text-amber-500 ${isLocating ? "animate-spin" : ""}`} />
           <span>{isLocating ? "Detecting location..." : "Use My Current Location"}</span>
         </button>
-        {location.latitude && location.longitude && (
+        {location.source === "current_location" && location.latitude && location.longitude && (
           <span className="flex items-center space-x-1 text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-lg">
             <CheckCircle2 className="h-3.5 w-3.5" />
             <span>
