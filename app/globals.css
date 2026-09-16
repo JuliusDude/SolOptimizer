@@ -20,6 +20,15 @@ body {
   letter-spacing: -0.015em;
 }
 
+/* Global high-visibility input text styling for dark theme */
+input, textarea, select {
+  color: #ffffff !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #64748b !important;
+}
+
 /* Custom dark scrollbar */
 ::-webkit-scrollbar {
   width: 7px;
