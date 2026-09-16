@@ -91,7 +91,7 @@ export default function WizardShell() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
       {/* Wizard Step Progress Stepper */}
-      <div className="mb-8">
+      <div className="mb-10">
         <div className="hidden sm:flex items-center justify-between">
           {STEPS.map((stepItem, idx) => {
             const Icon = stepItem.icon;
@@ -106,12 +106,12 @@ export default function WizardShell() {
                   className="flex flex-col items-center group focus:outline-none"
                 >
                   <div
-                    className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition ${
+                    className={`flex h-10 w-10 items-center justify-center rounded-lg border-2 transition-all ${
                       isCompleted
-                        ? "border-eco-600 bg-eco-600 text-white"
+                        ? "border-emerald-500 bg-emerald-500/10 text-emerald-400"
                         : isCurrent
-                        ? "border-solar-500 bg-solar-500 text-slate-900 font-bold ring-4 ring-solar-200"
-                        : "border-slate-300 bg-white text-slate-400 group-hover:border-slate-400"
+                        ? "border-amber-500 bg-amber-500/10 text-amber-500 ring-2 ring-amber-500/20 ring-offset-2 ring-offset-[#070A11]"
+                        : "border-white/10 bg-[#070A11] text-slate-500 group-hover:border-white/30"
                     }`}
                   >
                     <Icon className="h-4 w-4" />
@@ -119,9 +119,9 @@ export default function WizardShell() {
                   <span
                     className={`mt-2 text-xs font-semibold ${
                       isCurrent
-                        ? "text-slate-900 font-bold"
+                        ? "text-amber-500"
                         : isCompleted
-                        ? "text-eco-800"
+                        ? "text-emerald-400"
                         : "text-slate-500"
                     }`}
                   >
@@ -130,8 +130,8 @@ export default function WizardShell() {
                 </button>
                 {idx < STEPS.length - 1 && (
                   <div
-                    className={`h-0.5 flex-1 mx-2 transition ${
-                      state.step > idx + 1 ? "bg-eco-600" : "bg-slate-200"
+                    className={`h-px flex-1 mx-4 transition-colors ${
+                      state.step > idx + 1 ? "bg-emerald-500/50" : "bg-white/10"
                     }`}
                   />
                 )}
@@ -141,16 +141,16 @@ export default function WizardShell() {
         </div>
 
         {/* Mobile progress bar */}
-        <div className="sm:hidden flex flex-col space-y-2">
-          <div className="flex items-center justify-between text-xs font-bold text-slate-700">
+        <div className="sm:hidden flex flex-col space-y-3">
+          <div className="flex items-center justify-between text-xs font-bold text-slate-300">
             <span>
               Step {state.step} of 6: {STEPS[state.step - 1].label}
             </span>
-            <span>{Math.round((state.step / 6) * 100)}%</span>
+            <span className="font-mono text-amber-500">{Math.round((state.step / 6) * 100)}%</span>
           </div>
-          <div className="h-2 w-full overflow-hidden rounded-full bg-slate-200">
+          <div className="h-1.5 w-full overflow-hidden rounded bg-white/10">
             <div
-              className="h-full bg-solar-500 transition-all duration-300"
+              className="h-full bg-amber-500 transition-all duration-300"
               style={{ width: `${(state.step / 6) * 100}%` }}
             />
           </div>
@@ -158,62 +158,67 @@ export default function WizardShell() {
       </div>
 
       {/* Step Content Container */}
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
-        {state.step === 1 && (
-          <StepProperty
-            location={state.location}
-            onChange={(location) => setState((prev) => ({ ...prev, location }))}
-            onNext={handleNext}
-          />
-        )}
-        {state.step === 2 && (
-          <StepRoofMeasurement
-            location={state.location}
-            roof={state.roof}
-            onChange={(roof) => setState((prev) => ({ ...prev, roof }))}
-            onNext={handleNext}
-            onBack={handleBack}
-          />
-        )}
-        {state.step === 3 && (
-          <StepRoofCharacteristics
-            roof={state.roof}
-            onChange={(roof) => setState((prev) => ({ ...prev, roof }))}
-            onNext={handleNext}
-            onBack={handleBack}
-          />
-        )}
-        {state.step === 4 && (
-          <StepElectricity
-            electricity={state.electricity}
-            onChange={(electricity) =>
-              setState((prev) => ({ ...prev, electricity }))
-            }
-            onNext={handleNext}
-            onBack={handleBack}
-          />
-        )}
-        {state.step === 5 && (
-          <StepSystemAssumptions
-            system={state.system}
-            assumptions={state.customAssumptions}
-            onChangeSystem={(system) => setState((prev) => ({ ...prev, system }))}
-            onChangeAssumptions={(customAssumptions) =>
-              setState((prev) => ({ ...prev, customAssumptions }))
-            }
-            onNext={handleNext}
-            onBack={handleBack}
-          />
-        )}
-        {state.step === 6 && (
-          <StepReview
-            state={state}
-            onGoToStep={handleGoToStep}
-            onCalculate={handleCalculate}
-            onBack={handleBack}
-            isCalculating={isCalculating}
-          />
-        )}
+      <div className="rounded-xl border border-white/10 bg-white/[0.02] p-6 sm:p-10 shadow-lg backdrop-blur-sm relative overflow-hidden">
+        {/* Subtle grid background for the container */}
+        <div className="absolute inset-0 bg-[url('https://assets.watermelon.sh/components/grid-pattern.svg')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
+
+        <div className="relative z-10">
+          {state.step === 1 && (
+            <StepProperty
+              location={state.location}
+              onChange={(location) => setState((prev) => ({ ...prev, location }))}
+              onNext={handleNext}
+            />
+          )}
+          {state.step === 2 && (
+            <StepRoofMeasurement
+              location={state.location}
+              roof={state.roof}
+              onChange={(roof) => setState((prev) => ({ ...prev, roof }))}
+              onNext={handleNext}
+              onBack={handleBack}
+            />
+          )}
+          {state.step === 3 && (
+            <StepRoofCharacteristics
+              roof={state.roof}
+              onChange={(roof) => setState((prev) => ({ ...prev, roof }))}
+              onNext={handleNext}
+              onBack={handleBack}
+            />
+          )}
+          {state.step === 4 && (
+            <StepElectricity
+              electricity={state.electricity}
+              onChange={(electricity) =>
+                setState((prev) => ({ ...prev, electricity }))
+              }
+              onNext={handleNext}
+              onBack={handleBack}
+            />
+          )}
+          {state.step === 5 && (
+            <StepSystemAssumptions
+              system={state.system}
+              assumptions={state.customAssumptions}
+              onChangeSystem={(system) => setState((prev) => ({ ...prev, system }))}
+              onChangeAssumptions={(customAssumptions) =>
+                setState((prev) => ({ ...prev, customAssumptions }))
+              }
+              onNext={handleNext}
+              onBack={handleBack}
+            />
+          )}
+          {state.step === 6 && (
+            <StepReview
+              state={state}
+              onGoToStep={handleGoToStep}
+              onCalculate={handleCalculate}
+              onBack={handleBack}
+              isCalculating={isCalculating}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

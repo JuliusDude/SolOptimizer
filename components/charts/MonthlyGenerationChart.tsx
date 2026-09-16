@@ -32,19 +32,19 @@ export default function MonthlyGenerationChart({
   }));
 
   return (
-    <div className="w-full rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 gap-2 border-b border-slate-100">
+    <div className="w-full rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-6 shadow-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 gap-2 border-b border-white/10">
         <div>
-          <h3 className="text-base font-bold text-slate-900">
+          <h3 className="text-base font-bold text-white">
             Estimated Monthly Generation (kWh)
           </h3>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-400">
             Seasonal irradiance variations reflecting summer peak and monsoon dips across India.
           </p>
         </div>
-        <div className="flex items-center space-x-1.5 text-xs text-slate-600 bg-slate-100 px-3 py-1.5 rounded-lg">
+        <div className="flex items-center space-x-1.5 text-xs text-slate-400 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg">
           <span>Annual Total:</span>
-          <strong className="text-slate-900 font-mono">
+          <strong className="text-white font-mono">
             {formatNumber(annualGenerationKWh)} kWh
           </strong>
         </div>
@@ -53,10 +53,10 @@ export default function MonthlyGenerationChart({
       <div className="mt-4 h-[260px] w-full">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 10, right: 10, bottom: 5, left: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-            <XAxis dataKey="month" stroke="#64748b" fontSize={11} tickLine={false} />
+            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#334155" />
+            <XAxis dataKey="month" stroke="#94a3b8" fontSize={11} tickLine={false} />
             <YAxis
-              stroke="#64748b"
+              stroke="#94a3b8"
               fontSize={11}
               tickLine={false}
               tickFormatter={(v) => `${v}`}
@@ -64,11 +64,11 @@ export default function MonthlyGenerationChart({
             <Tooltip
               formatter={(value: any) => [`${formatNumber(value)} kWh`, "Generation"]}
               contentStyle={{
-                backgroundColor: "rgba(15, 23, 42, 0.95)",
+                backgroundColor: "rgba(7, 10, 17, 0.95)",
                 borderRadius: "0.5rem",
                 color: "#f8fafc",
                 fontSize: "12px",
-                border: "none",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
               }}
             />
             <Bar dataKey="generation" fill="#f59e0b" radius={[4, 4, 0, 0]} />

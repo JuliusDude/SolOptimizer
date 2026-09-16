@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function EstimatePage() {
   return (
-    <main className="min-h-screen bg-slate-50 py-10">
+    <main className="min-h-screen bg-[#070A11] py-10">
       <WizardShell />
     </main>
   );

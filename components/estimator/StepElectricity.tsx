@@ -28,17 +28,17 @@ export default function StepElectricity({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+        <h2 className="text-2xl font-bold tracking-tight text-white">
           How much do you pay for electricity?
         </h2>
-        <p className="mt-1 text-sm text-slate-600">
+        <p className="mt-1 text-sm text-slate-400">
           Your utility tariff and monthly bill calculate how much solar power can save you each year.
         </p>
       </div>
 
       {/* 1. Monthly Bill */}
-      <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm space-y-4">
-        <label className="block text-sm font-semibold text-slate-800">
+      <div className="rounded-xl border border-white/10 bg-[#070A11] p-6 shadow-sm space-y-4">
+        <label className="block text-sm font-semibold text-slate-200">
           Average Monthly Electricity Bill (₹ INR) <span className="text-red-500">*</span>
         </label>
         <div className="relative">
@@ -54,7 +54,7 @@ export default function StepElectricity({
               })
             }
             placeholder="e.g. 3500"
-            className="w-full rounded-lg border border-slate-300 px-4 py-3 text-xl font-bold text-slate-900 shadow-sm focus:border-solar-500 focus:outline-none focus:ring-1 focus:ring-solar-500"
+            className="w-full rounded-lg border border-white/10 px-4 py-3 text-xl font-bold text-white shadow-sm focus:border-amber-500/50 focus:outline-none focus:ring-1 focus:ring-amber-500/50"
           />
           <span className="absolute right-4 top-3.5 text-sm font-medium text-slate-400">
             ₹ / month
@@ -70,8 +70,8 @@ export default function StepElectricity({
               onClick={() => onChange({ ...electricity, monthlyBillINR: val })}
               className={`rounded-md border px-3 py-1 text-xs font-medium transition ${
                 electricity.monthlyBillINR === val
-                  ? "border-solar-500 bg-solar-50 text-solar-900 font-bold"
-                  : "border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
+                  ? "border-amber-500/50 bg-amber-500/5 text-amber-500 font-bold"
+                  : "border-white/10 bg-[#070A11] text-slate-400 hover:bg-white/5"
               }`}
             >
               {formatINR(val)}
@@ -81,12 +81,12 @@ export default function StepElectricity({
       </div>
 
       {/* 2. Optional Consumption */}
-      <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm space-y-3">
+      <div className="rounded-xl border border-white/10 bg-[#070A11] p-6 shadow-sm space-y-3">
         <div className="flex items-center justify-between">
-          <label className="block text-sm font-semibold text-slate-800">
+          <label className="block text-sm font-semibold text-slate-200">
             Monthly Consumption (Optional)
           </label>
-          <span className="text-xs text-slate-500">Found on utility electricity bill</span>
+          <span className="text-xs text-slate-400">Found on utility electricity bill</span>
         </div>
         <div className="relative">
           <input
@@ -100,7 +100,7 @@ export default function StepElectricity({
               })
             }
             placeholder="e.g. 450"
-            className="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:border-solar-500 focus:outline-none focus:ring-1 focus:ring-solar-500"
+            className="w-full rounded-lg border border-white/10 px-4 py-2.5 text-sm text-white shadow-sm focus:border-amber-500/50 focus:outline-none focus:ring-1 focus:ring-amber-500/50"
           />
           <span className="absolute right-4 top-2.5 text-sm font-medium text-slate-400">
             kWh / units
@@ -108,15 +108,15 @@ export default function StepElectricity({
         </div>
 
         {effectiveRate !== null && (
-          <p className="text-xs text-eco-700 bg-eco-50 p-2.5 rounded-lg border border-eco-200">
+          <p className="text-xs text-emerald-400 bg-emerald-500/10 p-2.5 rounded-lg border border-emerald-500/20">
             Your informational effective electricity rate: <strong>₹{effectiveRate} / kWh</strong>
           </p>
         )}
       </div>
 
       {/* 3. Tariff Mode */}
-      <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm space-y-4">
-        <label className="block text-sm font-semibold text-slate-800">
+      <div className="rounded-xl border border-white/10 bg-[#070A11] p-6 shadow-sm space-y-4">
+        <label className="block text-sm font-semibold text-slate-200">
           Grid Electricity Tariff
         </label>
 
@@ -132,19 +132,19 @@ export default function StepElectricity({
             }
             className={`flex flex-col rounded-xl border p-4 text-left transition ${
               !electricity.isCustomTariff
-                ? "border-solar-500 bg-amber-50/70 ring-2 ring-solar-400"
-                : "border-slate-200 bg-white hover:border-slate-300"
+                ? "border-amber-500/50 bg-amber-500/10 ring-2 ring-amber-500/50"
+                : "border-white/10 bg-[#070A11] hover:border-white/10"
             }`}
           >
             <div className="flex items-center justify-between">
-              <span className="text-sm font-bold text-slate-900">
+              <span className="text-sm font-bold text-white">
                 SolOptimizer Standard Tariff
               </span>
-              <span className="text-xs font-bold text-solar-800 bg-solar-100 px-2 py-0.5 rounded-full">
+              <span className="text-xs font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-lg">
                 ₹8.00 / kWh
               </span>
             </div>
-            <p className="mt-1 text-xs text-slate-500">
+            <p className="mt-1 text-xs text-slate-400">
               Benchmark average residential tariff across tier-1 and tier-2 Indian discoms.
             </p>
           </button>
@@ -159,19 +159,19 @@ export default function StepElectricity({
             }
             className={`flex flex-col rounded-xl border p-4 text-left transition ${
               electricity.isCustomTariff
-                ? "border-solar-500 bg-amber-50/70 ring-2 ring-solar-400"
-                : "border-slate-200 bg-white hover:border-slate-300"
+                ? "border-amber-500/50 bg-amber-500/10 ring-2 ring-amber-500/50"
+                : "border-white/10 bg-[#070A11] hover:border-white/10"
             }`}
           >
             <div className="flex items-center justify-between">
-              <span className="text-sm font-bold text-slate-900">
+              <span className="text-sm font-bold text-white">
                 Enter Custom Tariff
               </span>
-              <span className="text-xs font-medium text-slate-500">
+              <span className="text-xs font-medium text-slate-400">
                 Specify exact rate
               </span>
             </div>
-            <p className="mt-1 text-xs text-slate-500">
+            <p className="mt-1 text-xs text-slate-400">
               Use the exact rate per unit from your state electricity distribution company.
             </p>
           </button>
@@ -179,7 +179,7 @@ export default function StepElectricity({
 
         {electricity.isCustomTariff && (
           <div className="pt-2">
-            <label className="block text-xs font-medium text-slate-700 mb-1">
+            <label className="block text-xs font-medium text-slate-300 mb-1">
               Custom Tariff (₹ INR / kWh)
             </label>
             <div className="relative max-w-xs">
@@ -195,7 +195,7 @@ export default function StepElectricity({
                   })
                 }
                 placeholder="e.g. 8.5"
-                className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-900 shadow-sm focus:border-solar-500 focus:outline-none focus:ring-1 focus:ring-solar-500"
+                className="w-full rounded-lg border border-white/10 px-3 py-2 text-sm font-semibold text-white shadow-sm focus:border-amber-500/50 focus:outline-none focus:ring-1 focus:ring-amber-500/50"
               />
               <span className="absolute right-3 top-2 text-xs font-medium text-slate-400">
                 ₹ / kWh
@@ -206,8 +206,8 @@ export default function StepElectricity({
       </div>
 
       {/* Tariff Informational Note */}
-      <div className="flex items-start space-x-3 rounded-lg border border-slate-200 bg-slate-50 p-3.5 text-xs text-slate-600">
-        <Info className="h-4 w-4 flex-shrink-0 text-slate-500 mt-0.5" />
+      <div className="flex items-start space-x-3 rounded-lg border border-white/10 bg-white/5 p-3.5 text-xs text-slate-400">
+        <Info className="h-4 w-4 flex-shrink-0 text-slate-400 mt-0.5" />
         <span>
           <strong>Informational Energy Rate:</strong> Savings calculations evaluate the bill value of
           the generated power. Actual utility billing may include fixed charges, tiered slab rates,
@@ -216,11 +216,11 @@ export default function StepElectricity({
       </div>
 
       {/* Navigation Buttons */}
-      <div className="flex items-center justify-between pt-4 border-t border-slate-200">
+      <div className="flex items-center justify-between pt-4 border-t border-white/10">
         <button
           type="button"
           onClick={onBack}
-          className="rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 transition"
+          className="rounded-lg border border-white/10 bg-[#070A11] px-5 py-2.5 text-sm font-medium text-slate-300 shadow-sm hover:bg-white/5 transition"
         >
           ← Back
         </button>
@@ -228,7 +228,7 @@ export default function StepElectricity({
           type="button"
           onClick={onNext}
           disabled={!isValid}
-          className="rounded-lg bg-slate-900 px-6 py-2.5 text-sm font-medium text-white shadow hover:bg-slate-800 disabled:opacity-40 transition"
+          className="rounded-lg bg-amber-500 px-6 py-2.5 text-sm font-medium text-slate-950 shadow-[0_0_15px_rgba(245,158,11,0.2)] hover:bg-amber-400 active:scale-95 text-slate-950 disabled:opacity-40 transition"
         >
           Next: System & Assumptions →
         </button>

@@ -94,8 +94,8 @@ export default function ResultsPage() {
   if (!data) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
-        <div className="flex items-center space-x-2 text-slate-600">
-          <RefreshCw className="h-5 w-5 animate-spin text-solar-500" />
+        <div className="flex items-center space-x-2 text-slate-400">
+          <RefreshCw className="h-5 w-5 animate-spin text-amber-500" />
           <span>Generating your solar potential...</span>
         </div>
       </div>
@@ -122,7 +122,7 @@ export default function ResultsPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#070A11] py-8 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl space-y-8">
         {/* Top Header & Actions */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -130,12 +130,12 @@ export default function ResultsPage() {
             <button
               type="button"
               onClick={() => router.push("/estimate")}
-              className="inline-flex items-center space-x-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm hover:bg-slate-50"
+              className="inline-flex items-center space-x-1.5 rounded-lg border border-white/10 bg-white/[0.02] px-3 py-1.5 text-xs font-medium text-slate-300 shadow-sm hover:bg-[#070A11]"
             >
               <ArrowLeft className="h-3.5 w-3.5" />
               <span>Edit Inputs</span>
             </button>
-            <span className="text-xs text-slate-500">
+            <span className="text-xs text-slate-400">
               Property: <strong>{input.location.city}, {input.location.state}</strong>
             </span>
           </div>
@@ -143,7 +143,7 @@ export default function ResultsPage() {
           <div className="flex items-center space-x-3">
             <Link
               href="/dashboard"
-              className="inline-flex items-center space-x-1.5 rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 shadow-sm hover:bg-slate-50"
+              className="inline-flex items-center space-x-1.5 rounded-lg border border-white/10 bg-white/[0.02] px-3.5 py-2 text-xs font-semibold text-slate-300 shadow-sm hover:bg-[#070A11]"
             >
               <LayoutDashboard className="h-4 w-4" />
               <span>Dashboard</span>
@@ -155,8 +155,8 @@ export default function ResultsPage() {
               disabled={isSaving || savedSuccess}
               className={`inline-flex items-center space-x-2 rounded-lg px-4 py-2 text-xs font-bold shadow transition ${
                 savedSuccess
-                  ? "bg-eco-600 text-white"
-                  : "bg-slate-900 text-white hover:bg-slate-800"
+                  ? "bg-emerald-500 text-white"
+                  : "bg-amber-500 text-white hover:bg-amber-400"
               }`}
             >
               {savedSuccess ? (
@@ -166,7 +166,7 @@ export default function ResultsPage() {
                 </>
               ) : (
                 <>
-                  <Bookmark className="h-4 w-4 text-solar-400" />
+                  <Bookmark className="h-4 w-4 text-amber-400" />
                   <span>{isSaving ? "Saving..." : "Save to Dashboard"}</span>
                 </>
               )}
@@ -178,13 +178,13 @@ export default function ResultsPage() {
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-amber-950 p-8 text-white shadow-xl">
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="space-y-2">
-              <span className="inline-flex items-center space-x-1.5 rounded-full bg-solar-500/20 px-3 py-1 text-xs font-semibold text-solar-300 border border-solar-500/30">
-                <Sun className="h-3.5 w-3.5 text-solar-400" />
+              <span className="inline-flex items-center space-x-1.5 rounded-lg bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-300 border border-amber-500/20">
+                <Sun className="h-3.5 w-3.5 text-amber-400" />
                 <span>Estimated Solar Feasibility Assessment</span>
               </span>
               <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
                 Your Roof Potential:{" "}
-                <span className="text-solar-400 font-mono">
+                <span className="text-amber-400 font-mono">
                   {result.estimatedCapacityKW} kW
                 </span>
               </h1>
@@ -198,7 +198,7 @@ export default function ResultsPage() {
               </p>
             </div>
 
-            <div className="flex flex-col items-start md:items-end justify-center rounded-2xl bg-white/10 p-5 backdrop-blur-md border border-white/10">
+            <div className="flex flex-col items-start md:items-end justify-center rounded-2xl bg-white/[0.02]/10 p-5 backdrop-blur-md border border-white/10">
               <span className="text-xs font-semibold uppercase tracking-wider text-slate-300">
                 Turnkey Investment
               </span>
@@ -215,50 +215,50 @@ export default function ResultsPage() {
         {/* 5 Primary Metrics Cards */}
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
           {/* 1. Annual Generation */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm flex flex-col justify-between">
-            <div className="flex items-center justify-between text-slate-500">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-4 shadow-sm flex flex-col justify-between">
+            <div className="flex items-center justify-between text-slate-400">
               <span className="text-xs font-bold uppercase tracking-wider">Generation</span>
-              <Zap className="h-4 w-4 text-solar-500" />
+              <Zap className="h-4 w-4 text-amber-500" />
             </div>
             <div className="mt-3">
-              <div className="text-2xl font-bold font-mono text-slate-900">
+              <div className="text-2xl font-bold font-mono text-white">
                 {formatNumber(result.annualGenerationKWh)}
               </div>
-              <span className="text-xs font-medium text-slate-500">kWh / year</span>
+              <span className="text-xs font-medium text-slate-400">kWh / year</span>
             </div>
           </div>
 
           {/* 2. Annual Savings */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm flex flex-col justify-between">
-            <div className="flex items-center justify-between text-slate-500">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-4 shadow-sm flex flex-col justify-between">
+            <div className="flex items-center justify-between text-slate-400">
               <span className="text-xs font-bold uppercase tracking-wider">Bill Savings</span>
-              <IndianRupee className="h-4 w-4 text-eco-600" />
+              <IndianRupee className="h-4 w-4 text-emerald-400" />
             </div>
             <div className="mt-3">
-              <div className="text-2xl font-bold font-mono text-eco-700">
+              <div className="text-2xl font-bold font-mono text-emerald-400">
                 {formatINR(result.annualSavingsINR)}
               </div>
-              <span className="text-xs font-medium text-slate-500">estimated / year</span>
+              <span className="text-xs font-medium text-slate-400">estimated / year</span>
             </div>
           </div>
 
           {/* 3. Simple Payback */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm flex flex-col justify-between">
-            <div className="flex items-center justify-between text-slate-500">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-4 shadow-sm flex flex-col justify-between">
+            <div className="flex items-center justify-between text-slate-400">
               <span className="text-xs font-bold uppercase tracking-wider">Payback</span>
-              <Calendar className="h-4 w-4 text-solar-600" />
+              <Calendar className="h-4 w-4 text-amber-500" />
             </div>
             <div className="mt-3">
-              <div className="text-2xl font-bold font-mono text-slate-900">
+              <div className="text-2xl font-bold font-mono text-white">
                 {result.paybackYears !== null ? `${result.paybackYears} yrs` : "N/A"}
               </div>
-              <span className="text-xs font-medium text-slate-500">Simple break-even</span>
+              <span className="text-xs font-medium text-slate-400">Simple break-even</span>
             </div>
           </div>
 
           {/* 4. CO2 Avoided */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm flex flex-col justify-between">
-            <div className="flex items-center justify-between text-slate-500">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-4 shadow-sm flex flex-col justify-between">
+            <div className="flex items-center justify-between text-slate-400">
               <span className="text-xs font-bold uppercase tracking-wider">CO₂ Offset</span>
               <Leaf className="h-4 w-4 text-emerald-600" />
             </div>
@@ -266,23 +266,23 @@ export default function ResultsPage() {
               <div className="text-2xl font-bold font-mono text-emerald-700">
                 {(result.annualCO2AvoidedKg / 1000).toFixed(1)} T
               </div>
-              <span className="text-xs font-medium text-slate-500">
+              <span className="text-xs font-medium text-slate-400">
                 tonnes CO₂ / year
               </span>
             </div>
           </div>
 
           {/* 5. Usable Area */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm flex flex-col justify-between col-span-2 sm:col-span-1">
-            <div className="flex items-center justify-between text-slate-500">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-4 shadow-sm flex flex-col justify-between col-span-2 sm:col-span-1">
+            <div className="flex items-center justify-between text-slate-400">
               <span className="text-xs font-bold uppercase tracking-wider">Usable Roof</span>
               <Sun className="h-4 w-4 text-slate-400" />
             </div>
             <div className="mt-3">
-              <div className="text-2xl font-bold font-mono text-slate-900">
+              <div className="text-2xl font-bold font-mono text-white">
                 {result.usableRoofAreaSqFt}
               </div>
-              <span className="text-xs font-medium text-slate-500">
+              <span className="text-xs font-medium text-slate-400">
                 sq ft (85% usable)
               </span>
             </div>

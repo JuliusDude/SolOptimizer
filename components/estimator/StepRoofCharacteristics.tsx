@@ -102,7 +102,7 @@ const SHADING_LEVELS: Array<{
     id: "high",
     title: "High Shade",
     factor: DEFAULT_SOLAR_ASSUMPTIONS.shadingFactors.high,
-    icon: <CloudFog className="h-6 w-6 text-slate-500" />,
+    icon: <CloudFog className="h-6 w-6 text-slate-400" />,
     description: "Significant shading during peak daytime sunlight hours from large buildings or dense canopy.",
   },
 ];
@@ -119,10 +119,10 @@ export default function StepRoofCharacteristics({
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+        <h2 className="text-2xl font-bold tracking-tight text-white">
           Which direction does your roof face and how much shade does it get?
         </h2>
-        <p className="mt-1 text-sm text-slate-600">
+        <p className="mt-1 text-sm text-slate-400">
           Orientation and shading directly scale your system&apos;s expected daily electricity output.
         </p>
       </div>
@@ -130,11 +130,11 @@ export default function StepRoofCharacteristics({
       {/* 1. Orientation Selection */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <label className="flex items-center space-x-2 text-sm font-semibold text-slate-800">
-            <Compass className="h-4 w-4 text-solar-600" />
+          <label className="flex items-center space-x-2 text-sm font-semibold text-slate-200">
+            <Compass className="h-4 w-4 text-amber-500" />
             <span>Roof Facing Direction (Azimuth)</span>
           </label>
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-slate-400">
             Current Factor: <strong>{selectedOrientation?.factor.toFixed(2)}x</strong>
           </span>
         </div>
@@ -149,27 +149,27 @@ export default function StepRoofCharacteristics({
                 onClick={() => onChange({ ...roof, orientation: orient.id })}
                 className={`relative flex flex-col items-start rounded-xl border p-3.5 text-left transition ${
                   isSelected
-                    ? "border-solar-500 bg-amber-50/70 ring-2 ring-solar-400 shadow-sm"
-                    : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50"
+                    ? "border-amber-500/50 bg-amber-500/10 ring-2 ring-amber-500/50 shadow-sm"
+                    : "border-white/10 bg-[#070A11] hover:border-white/10 hover:bg-white/5"
                 }`}
               >
                 <div className="flex w-full items-center justify-between">
-                  <span className="text-sm font-bold text-slate-900">
+                  <span className="text-sm font-bold text-white">
                     {orient.label}
                   </span>
                   <span
-                    className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                    className={`rounded-lg px-2 py-0.5 text-[10px] font-bold ${
                       orient.factor >= 0.95
-                        ? "bg-eco-100 text-eco-800"
+                        ? "bg-emerald-500/10 text-emerald-400"
                         : orient.factor >= 0.8
-                        ? "bg-amber-100 text-amber-800"
-                        : "bg-slate-100 text-slate-600"
+                        ? "bg-amber-500/20 text-amber-400"
+                        : "bg-white/10 text-slate-400"
                     }`}
                   >
                     {orient.badge}
                   </span>
                 </div>
-                <p className="mt-1.5 line-clamp-2 text-xs text-slate-500">
+                <p className="mt-1.5 line-clamp-2 text-xs text-slate-400">
                   {orient.description}
                 </p>
               </button>
@@ -181,11 +181,11 @@ export default function StepRoofCharacteristics({
       {/* 2. Shading Selection */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <label className="flex items-center space-x-2 text-sm font-semibold text-slate-800">
-            <SunMedium className="h-4 w-4 text-solar-600" />
+          <label className="flex items-center space-x-2 text-sm font-semibold text-slate-200">
+            <SunMedium className="h-4 w-4 text-amber-500" />
             <span>Sunlight Obstruction & Shading</span>
           </label>
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-slate-400">
             Current Factor: <strong>{selectedShading?.factor.toFixed(2)}x</strong>
           </span>
         </div>
@@ -200,24 +200,24 @@ export default function StepRoofCharacteristics({
                 onClick={() => onChange({ ...roof, shading: shade.id })}
                 className={`flex flex-col items-start rounded-xl border p-4 text-left transition ${
                   isSelected
-                    ? "border-solar-500 bg-amber-50/70 ring-2 ring-solar-400 shadow-sm"
-                    : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50"
+                    ? "border-amber-500/50 bg-amber-500/10 ring-2 ring-amber-500/50 shadow-sm"
+                    : "border-white/10 bg-[#070A11] hover:border-white/10 hover:bg-white/5"
                 }`}
               >
                 <div className="flex items-center space-x-3">
-                  <div className="rounded-lg bg-white p-2 shadow-sm border border-slate-100">
+                  <div className="rounded-lg bg-[#070A11] p-2 shadow-sm border border-white/5">
                     {shade.icon}
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900">
+                    <h4 className="text-sm font-bold text-white">
                       {shade.title}
                     </h4>
-                    <span className="text-xs font-semibold text-slate-500">
+                    <span className="text-xs font-semibold text-slate-400">
                       {(shade.factor * 100).toFixed(0)}% output
                     </span>
                   </div>
                 </div>
-                <p className="mt-3 text-xs text-slate-600">
+                <p className="mt-3 text-xs text-slate-400">
                   {shade.description}
                 </p>
               </button>
@@ -227,18 +227,18 @@ export default function StepRoofCharacteristics({
       </div>
 
       {/* Navigation Buttons */}
-      <div className="flex items-center justify-between pt-4 border-t border-slate-200">
+      <div className="flex items-center justify-between pt-4 border-t border-white/10">
         <button
           type="button"
           onClick={onBack}
-          className="rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 transition"
+          className="rounded-lg border border-white/10 bg-[#070A11] px-5 py-2.5 text-sm font-medium text-slate-300 shadow-sm hover:bg-white/5 transition"
         >
           ← Back
         </button>
         <button
           type="button"
           onClick={onNext}
-          className="rounded-lg bg-slate-900 px-6 py-2.5 text-sm font-medium text-white shadow hover:bg-slate-800 transition"
+          className="rounded-lg bg-amber-500 px-6 py-2.5 text-sm font-medium text-slate-950 shadow-[0_0_15px_rgba(245,158,11,0.2)] hover:bg-amber-400 active:scale-95 text-slate-950 transition"
         >
           Next: Electricity & Tariff →
         </button>

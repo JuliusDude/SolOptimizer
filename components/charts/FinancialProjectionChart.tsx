@@ -45,20 +45,20 @@ export default function FinancialProjectionChart({
   };
 
   return (
-    <div className="w-full rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 gap-2 border-b border-slate-100">
+    <div className="w-full rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-6 shadow-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 gap-2 border-b border-white/10">
         <div>
-          <h3 className="text-base font-bold text-slate-900">
+          <h3 className="text-base font-bold text-white">
             25-Year Cumulative Savings & Return on Investment
           </h3>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-400">
             Shows cumulative electricity bill savings surpassing initial turnkey capital investment.
           </p>
         </div>
         {paybackYears !== null && (
-          <div className="flex items-center space-x-2 rounded-lg bg-eco-50 px-3 py-1.5 text-xs font-semibold text-eco-800 border border-eco-200 self-start sm:self-auto">
+          <div className="flex items-center space-x-2 rounded-lg bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold text-emerald-400 border border-emerald-500/20 self-start sm:self-auto">
             <span>Payback Point:</span>
-            <span className="font-bold text-eco-900 font-mono">
+            <span className="font-bold text-emerald-500 font-mono">
               ~{paybackYears} Years
             </span>
           </div>
@@ -77,16 +77,16 @@ export default function FinancialProjectionChart({
                 <stop offset="95%" stopColor="#10b981" stopOpacity={0.0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#334155" />
             <XAxis
               dataKey="year"
               tickLine={false}
-              stroke="#64748b"
+              stroke="#94a3b8"
               fontSize={12}
             />
             <YAxis
               tickLine={false}
-              stroke="#64748b"
+              stroke="#94a3b8"
               fontSize={12}
               tickFormatter={formatLakhs}
             />
@@ -99,11 +99,11 @@ export default function FinancialProjectionChart({
               }}
               labelFormatter={(label) => `Projection: ${label}`}
               contentStyle={{
-                backgroundColor: "rgba(15, 23, 42, 0.95)",
+                backgroundColor: "rgba(7, 10, 17, 0.95)",
                 borderRadius: "0.5rem",
                 color: "#f8fafc",
                 fontSize: "12px",
-                border: "none",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
               }}
             />
             <Legend
@@ -118,7 +118,7 @@ export default function FinancialProjectionChart({
               label={{
                 value: "Turnkey Cost",
                 position: "insideTopLeft",
-                fill: "#d97706",
+                fill: "#f59e0b",
                 fontSize: 11,
               }}
             />
@@ -143,7 +143,7 @@ export default function FinancialProjectionChart({
         </ResponsiveContainer>
       </div>
 
-      <div className="mt-2 flex flex-wrap items-center justify-between text-[11px] text-slate-400 pt-2 border-t border-slate-100">
+      <div className="mt-2 flex flex-wrap items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-white/10">
         <span>Includes 0.7% annual degradation rate</span>
         <span>Includes 3.0% annual grid tariff escalation rate</span>
       </div>

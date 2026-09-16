@@ -81,10 +81,10 @@ export default function StepProperty({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+        <h2 className="text-2xl font-bold tracking-tight text-white">
           Where is the property you are evaluating?
         </h2>
-        <p className="mt-1 text-sm text-slate-600">
+        <p className="mt-1 text-sm text-slate-400">
           Location determines the solar irradiance (Peak Sun Hours) used to
           forecast annual generation.
         </p>
@@ -96,13 +96,13 @@ export default function StepProperty({
           type="button"
           onClick={handleUseCurrentLocation}
           disabled={isLocating}
-          className="flex items-center justify-center space-x-2 rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-solar-500 disabled:opacity-50 transition"
+          className="flex items-center justify-center space-x-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-slate-200 shadow-sm hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-amber-500 disabled:opacity-50 transition"
         >
-          <Navigation className={`h-4 w-4 text-solar-600 ${isLocating ? "animate-spin" : ""}`} />
+          <Navigation className={`h-4 w-4 text-amber-500 ${isLocating ? "animate-spin" : ""}`} />
           <span>{isLocating ? "Detecting location..." : "Use My Current Location"}</span>
         </button>
         {location.latitude && location.longitude && (
-          <span className="flex items-center space-x-1 text-xs text-eco-700 bg-eco-50 border border-eco-200 px-3 py-1.5 rounded-full">
+          <span className="flex items-center space-x-1 text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-lg">
             <CheckCircle2 className="h-3.5 w-3.5" />
             <span>
               GPS Lat: {location.latitude.toFixed(4)}, Lng: {location.longitude.toFixed(4)}
@@ -112,7 +112,7 @@ export default function StepProperty({
       </div>
 
       {errorMsg && (
-        <div className="flex items-center space-x-2 text-xs text-amber-700 bg-amber-50 p-2.5 rounded-md border border-amber-200">
+        <div className="flex items-center space-x-2 text-xs text-red-400 bg-red-500/10 p-2.5 rounded-md border border-red-500/20">
           <AlertTriangle className="h-4 w-4 flex-shrink-0" />
           <span>{errorMsg}</span>
         </div>
@@ -134,8 +134,8 @@ export default function StepProperty({
                 onClick={() => handleSelectPreset(item)}
                 className={`rounded-lg px-3 py-1.5 text-xs font-medium transition ${
                   isSelected
-                    ? "bg-solar-500 text-slate-900 font-bold shadow-sm"
-                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                    ? "bg-amber-500 text-slate-950 font-bold shadow-sm"
+                    : "bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10"
                 }`}
               >
                 {item.city}
@@ -150,7 +150,7 @@ export default function StepProperty({
         <div>
           <label
             htmlFor="city-input"
-            className="block text-sm font-medium text-slate-700"
+            className="block text-sm font-medium text-slate-300"
           >
             City / Town <span className="text-red-500">*</span>
           </label>
@@ -163,16 +163,16 @@ export default function StepProperty({
                 onChange({ ...location, city: e.target.value, source: "manual" })
               }
               placeholder="e.g. Belagavi"
-              className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 shadow-sm focus:border-solar-500 focus:outline-none focus:ring-1 focus:ring-solar-500"
+              className="w-full rounded-lg border border-white/10 bg-white/5 px-3.5 py-2.5 text-sm text-slate-200 placeholder:text-slate-500 shadow-sm focus:border-amber-500/50 focus:outline-none focus:ring-1 focus:ring-amber-500/50"
             />
-            <MapPin className="absolute right-3 top-2.5 h-4 w-4 text-slate-400" />
+            <MapPin className="absolute right-3 top-2.5 h-4 w-4 text-slate-500" />
           </div>
         </div>
 
         <div>
           <label
             htmlFor="state-input"
-            className="block text-sm font-medium text-slate-700"
+            className="block text-sm font-medium text-slate-300"
           >
             State
           </label>
@@ -184,39 +184,39 @@ export default function StepProperty({
               onChange({ ...location, state: e.target.value })
             }
             placeholder="e.g. Karnataka"
-            className="mt-1 w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 shadow-sm focus:border-solar-500 focus:outline-none focus:ring-1 focus:ring-solar-500"
+            className="mt-1 w-full rounded-lg border border-white/10 bg-white/5 px-3.5 py-2.5 text-sm text-slate-200 placeholder:text-slate-500 shadow-sm focus:border-amber-500/50 focus:outline-none focus:ring-1 focus:ring-amber-500/50"
           />
         </div>
       </div>
 
       {/* Irradiance Info Banner */}
-      <div className="rounded-xl border border-solar-200 bg-gradient-to-r from-amber-50 to-orange-50 p-4">
+      <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4">
         <div className="flex items-start space-x-3">
-          <div className="rounded-lg bg-solar-500/20 p-2 text-solar-700">
+          <div className="rounded-lg bg-amber-500/10 p-2 text-amber-500">
             <Sun className="h-5 w-5" />
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-slate-900">
+            <h4 className="text-sm font-semibold text-white">
               Solar Resource for {location.city || "Selected Area"}
             </h4>
-            <p className="mt-0.5 text-xs text-slate-600">
+            <p className="mt-0.5 text-xs text-slate-400">
               Estimated Peak Sun Hours:{" "}
-              <strong className="text-slate-900">
+              <strong className="text-white">
                 {solarResource.peakSunHours} kWh/m²/day
               </strong>{" "}
-              (Source: {solarResource.source})
+              <span className="opacity-70">(Source: {solarResource.source})</span>
             </p>
           </div>
         </div>
       </div>
 
       {/* Navigation */}
-      <div className="flex justify-end pt-4 border-t border-slate-200">
+      <div className="flex justify-end pt-4 border-t border-white/10">
         <button
           type="button"
           onClick={onNext}
           disabled={!isFormValid}
-          className="rounded-lg bg-slate-900 px-6 py-2.5 text-sm font-medium text-white shadow hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-solar-500 disabled:opacity-40 transition"
+          className="rounded-lg bg-amber-500 px-6 py-2.5 text-sm font-bold text-slate-950 shadow-[0_0_15px_rgba(245,158,11,0.2)] hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-[#070A11] disabled:opacity-40 transition active:scale-95"
         >
           Next: Roof Measurement →
         </button>

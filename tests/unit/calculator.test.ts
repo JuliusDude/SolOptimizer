@@ -8,9 +8,10 @@ import {
   calculateSimplePaybackYears,
   calculateCO2AvoidedKg,
   calculateTwentyFiveYearProjection,
+  calculateMonthlyGenerationKWh,
   calculateSolarEstimate,
 } from "../../lib/solar/calculator";
-import { DEFAULT_SOLAR_ASSUMPTIONS } from "../../lib/solar/assumptions";
+import { DEFAULT_SOLAR_ASSUMPTIONS, getSolarResourceForLocation } from "../../lib/solar/assumptions";
 import { SolarEstimatorInput } from "../../lib/solar/types";
 
 describe("Solar Calculation Engine", () => {
@@ -148,4 +149,60 @@ describe("Solar Calculation Engine", () => {
       expect(result.explanation.capacityFormula).toContain("12.75 kW");
     });
   });
+
+
+  describe('Monthly Generation (kWh)', () => {
+    it('distributes annual generation across 12 months using defined seasonal weights', () => {
+      const annualGen = 12000;
+      const monthly = calculateMonthlyGenerationKWh(annualGen);
+      expect(monthly).toHaveLength(12);
+      // The sum of monthly should equal annual (with some minor rounding variance)
+      const sum = monthly.reduce((a, b) => a + b, 0);
+      expect(Math.abs(sum - annualGen)).toBeLessThan(12); // rounding errors 1 per month
+    });
+  });
+
+  describe('Solar Resource Lookup', () => {
+    it('matches exact city and state', () => {
+      const resource = getSolarResourceForLocation('Bengaluru', 'Karnataka');
+      expect(resource.matchedLocation).toBe('Bengaluru, Karnataka');
+      expect(resource.peakSunHours).toBeDefined();
+    });
+
+    it('falls back to partial match if state is not provided or mismatched', () => {
+      const resource = getSolarResourceForLocation('mumbai', '');
+      expect(resource.matchedLocation.toLowerCase()).toContain('mumbai');
+    });
+
+    it('falls back to default assumption when city is completely unknown', () => {
+      const resource = getSolarResourceForLocation('UnknownCityX', 'UnknownStateY');
+      expect(resource.matchedLocation).toBe('National Average');
+      expect(resource.peakSunHours).toBe(DEFAULT_SOLAR_ASSUMPTIONS.peakSunHoursPerDay);
+    });
+  });
+
+  describe('Calculate Solar Estimate Custom Overrides', () => {
+    it('overrides default assumptions correctly', () => {
+      const input = {
+        location: { city: 'Bengaluru', state: 'Karnataka', country: 'India', latitude: 12, longitude: 77 },
+        roof: { areaSqFt: 1000, areaSqM: 92, measurementMethod: 'manual', orientation: 'south', shading: 'low' },
+        electricity: { monthlyBillINR: 2000, monthlyConsumptionKWh: 300, tariffINRPerKWh: 6.5, isCustomTariff: false },
+        system: { costPerKW: 50000, isCustomCost: true },
+      };
+      
+      const customAssumptions = {
+        usableRoofFactor: 0.5, // much lower than default 0.85
+        areaPerKWsqFt: 100, // much higher than default 80
+        peakSunHoursPerDay: 5.0
+      };
+
+      const result = calculateSolarEstimate(input as any, customAssumptions);
+      
+      // 1000 * 0.5 = 500 usable area
+      expect(result.usableRoofAreaSqFt).toBe(500);
+      // 500 / 100 = 5 kW capacity
+      expect(result.estimatedCapacityKW).toBe(5);
+    });
+  });
+
 });
