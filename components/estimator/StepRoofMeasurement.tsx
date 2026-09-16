@@ -139,9 +139,9 @@ export default function StepRoofMeasurement({
               value={unit === "sqft" ? roof.areaSqFt || "" : roof.areaSqM || ""}
               onChange={(e) => handleManualAreaChange(Number(e.target.value))}
               placeholder={unit === "sqft" ? "e.g. 1200" : "e.g. 111"}
-              className="w-full rounded-lg border border-white/10 px-4 py-3 text-lg font-semibold text-white shadow-sm focus:border-amber-500/50 focus:outline-none focus:ring-1 focus:ring-amber-500/50"
+              className="w-full rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-2xl font-mono font-bold text-white placeholder:text-slate-500 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
             />
-            <span className="absolute right-4 top-3.5 text-sm font-medium text-slate-400">
+            <span className="absolute right-4 top-3.5 font-mono text-sm font-semibold text-slate-400">
               {unit === "sqft" ? "sq ft" : "m²"}
             </span>
           </div>
