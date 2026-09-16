@@ -1,0 +1,137 @@
+{
+  "default": {
+    "peakSunHoursPerDay": 5.2,
+    "source": "simulated_regional_dataset",
+    "version": "1.0"
+  },
+  "Belagavi, Karnataka": {
+    "city": "Belagavi",
+    "state": "Karnataka",
+    "country": "India",
+    "latitude": 15.8497,
+    "longitude": 74.4977,
+    "peakSunHoursPerDay": 5.4,
+    "source": "simulated_regional_dataset",
+    "version": "1.0"
+  },
+  "Bengaluru, Karnataka": {
+    "city": "Bengaluru",
+    "state": "Karnataka",
+    "country": "India",
+    "latitude": 12.9716,
+    "longitude": 77.5946,
+    "peakSunHoursPerDay": 5.3,
+    "source": "simulated_regional_dataset",
+    "version": "1.0"
+  },
+  "Mumbai, Maharashtra": {
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "country": "India",
+    "latitude": 19.076,
+    "longitude": 72.8777,
+    "peakSunHoursPerDay": 5.1,
+    "source": "simulated_regional_dataset",
+    "version": "1.0"
+  },
+  "Pune, Maharashtra": {
+    "city": "Pune",
+    "state": "Maharashtra",
+    "country": "India",
+    "latitude": 18.5204,
+    "longitude": 73.8567,
+    "peakSunHoursPerDay": 5.4,
+    "source": "simulated_regional_dataset",
+    "version": "1.0"
+  },
+  "New Delhi, Delhi": {
+    "city": "New Delhi",
+    "state": "Delhi",
+    "country": "India",
+    "latitude": 28.6139,
+    "longitude": 77.209,
+    "peakSunHoursPerDay": 5.2,
+    "source": "simulated_regional_dataset",
+    "version": "1.0"
+  },
+  "Jaipur, Rajasthan": {
+    "city": "Jaipur",
+    "state": "Rajasthan",
+    "country": "India",
+    "latitude": 26.9124,
+    "longitude": 75.7873,
+    "peakSunHoursPerDay": 5.8,
+    "source": "simulated_regional_dataset",
+    "version": "1.0"
+  },
+  "Ahmedabad, Gujarat": {
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "country": "India",
+    "latitude": 23.0225,
+    "longitude": 72.5714,
+    "peakSunHoursPerDay": 5.6,
+    "source": "simulated_regional_dataset",
+    "version": "1.0"
+  },
+  "Chennai, Tamil Nadu": {
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "latitude": 13.0827,
+    "longitude": 80.2707,
+    "peakSunHoursPerDay": 5.5,
+    "source": "simulated_regional_dataset",
+    "version": "1.0"
+  },
+  "Hyderabad, Telangana": {
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "country": "India",
+    "latitude": 17.385,
+    "longitude": 78.4867,
+    "peakSunHoursPerDay": 5.4,
+    "source": "simulated_regional_dataset",
+    "version": "1.0"
+  },
+  "Kolkata, West Bengal": {
+    "city": "Kolkata",
+    "state": "West Bengal",
+    "country": "India",
+    "latitude": 22.5726,
+    "longitude": 88.3639,
+    "peakSunHoursPerDay": 4.8,
+    "source": "simulated_regional_dataset",
+    "version": "1.0"
+  },
+  "Bhopal, Madhya Pradesh": {
+    "city": "Bhopal",
+    "state": "Madhya Pradesh",
+    "country": "India",
+    "latitude": 23.2599,
+    "longitude": 77.4126,
+    "peakSunHoursPerDay": 5.5,
+    "source": "simulated_regional_dataset",
+    "version": "1.0"
+  },
+  "Chandigarh, Punjab": {
+    "city": "Chandigarh",
+    "state": "Punjab",
+    "country": "India",
+    "latitude": 30.7333,
+    "longitude": 76.7794,
+    "peakSunHoursPerDay": 5.2,
+    "source": "simulated_regional_dataset",
+    "version": "1.0"
+  },
+  "Hubli, Karnataka": {
+    "city": "Hubli",
+    "state": "Karnataka",
+    "country": "India",
+    "latitude": 15.3647,
+    "longitude": 75.124,
+    "peakSunHoursPerDay": 5.4,
+    "source": "simulated_regional_dataset",
+    "version": "1.0"
+  }
+}

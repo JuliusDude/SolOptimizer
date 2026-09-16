@@ -1,0 +1,29 @@
+{
+  "version": "1.0.0",
+  "name": "Standard Indian Residential Assumptions 2026",
+  "peakSunHoursPerDay": 5.2,
+  "panelEfficiency": 0.20,
+  "usableRoofFactor": 0.85,
+  "areaPerKWsqFt": 80,
+  "systemPerformanceFactor": 0.78,
+  "orientationFactors": {
+    "north": 0.60,
+    "northEast": 0.70,
+    "east": 0.85,
+    "southEast": 0.95,
+    "south": 1.00,
+    "southWest": 0.95,
+    "west": 0.85,
+    "northWest": 0.70
+  },
+  "shadingFactors": {
+    "low": 1.00,
+    "moderate": 0.80,
+    "high": 0.55
+  },
+  "annualDegradationRate": 0.007,
+  "co2KgPerKWh": 0.82,
+  "tariffEscalationRate": 0.03,
+  "defaultCostPerKW": 55000,
+  "defaultTariffINR": 8.00
+}
