@@ -67,7 +67,7 @@ export default function LandingPage() {
       <Hero14
         showNav={false}
         showAsciiBackground={true}
-        showTelemetryHUD={true}
+        showTelemetryHUD={false}
         badgeText="Problem Statement PS03 • Sustainable Energy"
         headingLine1="Know your roof."
         headingLine2="Know your savings."
@@ -136,17 +136,6 @@ export default function LandingPage() {
               >
                 <span>Run Instant Demo (Belagavi)</span>
               </button>
-            </div>
-
-            <div className="flex items-center justify-center gap-6 pt-4 text-[11px] font-mono text-slate-400">
-              <span className="flex items-center gap-1.5">
-                <ShieldCheck className="size-3.5 text-emerald-400" />
-                <span>No phone number required</span>
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Zap className="size-3.5 text-amber-400" />
-                <span>Instant calculations</span>
-              </span>
             </div>
           </div>
         </div>

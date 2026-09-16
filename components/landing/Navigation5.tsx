@@ -1,253 +1,61 @@
 import { cn } from '@/lib/utils';
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
-import {
-  Cpu,
-  Layers,
-  GitBranch,
-  Terminal,
-  Command,
+  Sun,
+  Calculator,
+  LayoutDashboard,
   User,
   Menu,
-  ArrowUpRight,
+  ArrowRight,
 } from 'lucide-react';
+import Link from 'next/link';
 
 export function Navigation5() {
   return (
-    <div className="relative w-full py-10">
+    <div className="relative w-full py-10 z-50">
       <div className="mx-auto flex max-w-7xl items-center justify-center px-6">
         {/* Floating Navbar Pill */}
-        <div className="flex h-16 w-4xl items-center justify-between gap-2 rounded-xl border border-neutral-200 bg-white pr-3 shadow-sm md:w-5xl dark:border-neutral-800 dark:bg-neutral-950">
+        <div className="flex h-16 w-full max-w-4xl items-center justify-between gap-2 rounded-xl border border-neutral-200 bg-white pr-3 shadow-sm dark:border-white/10 dark:bg-[#070A11]/80 dark:backdrop-blur-md">
           {/* Logo Section */}
-          <div className="flex items-center gap-2 pr-6 pl-4">
-            <div className="flex h-8 w-8 items-center justify-center text-orange-600 dark:text-orange-500">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-6 w-6 fill-current"
-              >
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-              </svg>
+          <Link href="/" className="flex items-center gap-2 pr-6 pl-4 group">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-amber-500 to-amber-400 text-slate-950 shadow-[0_0_12px_rgba(245,158,11,0.3)] group-hover:scale-105 transition">
+              <Sun className="h-5 w-5" />
             </div>
-            <span className="text-lg font-bold tracking-tight text-neutral-900 dark:text-white">
-              Watermelon
-            </span>
-          </div>
+            <div className="flex flex-col">
+              <span className="text-lg font-extrabold tracking-tight text-neutral-900 dark:text-white leading-none">
+                Sol<span className="text-amber-400">Optimizer</span>
+              </span>
+            </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:block">
-            <NavigationMenu
-              className={cn(
-                'static',
-                // Position the viewport wrapper to be full-width relative to the navbar container
-                '[&>div:last-child]:inset-x-0 [&>div:last-child]:top-full [&>div:last-child]:w-full',
-                // Custom viewport styling for the "island" look
-                '[&_[data-slot=navigation-menu-viewport]]:mx-auto [&_[data-slot=navigation-menu-viewport]]:-mt-6 [&_[data-slot=navigation-menu-viewport]]:max-w-7xl [&_[data-slot=navigation-menu-viewport]]:ring-0',
-                '[&_[data-slot=navigation-menu-viewport]]:rounded-[2.5rem] [&_[data-slot=navigation-menu-viewport]]:border [&_[data-slot=navigation-menu-viewport]]:border-neutral-200 dark:[&_[data-slot=navigation-menu-viewport]]:border-neutral-800',
-                '[&_[data-slot=navigation-menu-viewport]]:bg-white [&_[data-slot=navigation-menu-viewport]]:shadow-2xl dark:[&_[data-slot=navigation-menu-viewport]]:bg-neutral-950',
-                // Viewport smooth animations
-                '[&_[data-slot=navigation-menu-viewport]]:transition-all [&_[data-slot=navigation-menu-viewport]]:duration-300 [&_[data-slot=navigation-menu-viewport]]:ease-in-out',
-                '[&_[data-slot=navigation-menu-viewport]]:data-open:fade-in-0 [&_[data-slot=navigation-menu-viewport]]:data-closed:fade-out-0',
-                '[&_[data-slot=navigation-menu-viewport]]:data-open:zoom-in-100 [&_[data-slot=navigation-menu-viewport]]:data-closed:zoom-out-100',
-              )}
-            >
-              <NavigationMenuList className="gap-1">
+            <NavigationMenu className="static">
+              <NavigationMenuList className="gap-2">
                 <NavigationMenuItem>
                   <NavigationMenuLink
-                    className="rounded-xl bg-transparent px-4 py-2 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-50"
-                    href="#"
+                    className="flex items-center gap-2 rounded-xl bg-transparent px-4 py-2 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-slate-300 dark:hover:bg-white/5 dark:hover:text-white"
+                    href="/estimate"
                   >
-                    Features
+                    <Calculator className="h-4 w-4 text-amber-400" />
+                    Estimator
                   </NavigationMenuLink>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
                   <NavigationMenuLink
-                    className="flex items-center gap-2 rounded-xl bg-transparent px-4 py-2 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-50"
-                    href="#"
+                    className="flex items-center gap-2 rounded-xl bg-transparent px-4 py-2 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-slate-300 dark:hover:bg-white/5 dark:hover:text-white"
+                    href="/dashboard"
                   >
-                    Developers
-                    <Badge
-                      variant="secondary"
-                      className="h-4 rounded-xl bg-orange-100 px-1.5 text-[10px] text-orange-600 hover:bg-orange-100 dark:bg-orange-500/20 dark:text-orange-400 dark:hover:bg-orange-500/20"
-                    >
-                      API
-                    </Badge>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="h-auto rounded-xl bg-transparent px-4 py-2 text-sm font-medium text-neutral-600 transition-all hover:bg-neutral-100/50 hover:text-neutral-900 focus:bg-transparent data-[state=open]:bg-neutral-100/80 dark:text-neutral-400 dark:hover:bg-neutral-800/50 dark:hover:text-neutral-50 dark:data-[state=open]:bg-neutral-800/80">
-                    Solutions
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent className="p-0">
-                    <div className="grid w-5xl grid-cols-4 gap-6 divide-x divide-neutral-100 px-10 py-10 dark:divide-neutral-900">
-                      {/* Column 1 */}
-                      <div className="flex flex-col px-2">
-                        <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-100 dark:bg-neutral-900">
-                          <Cpu className="h-5 w-5 text-neutral-700 dark:text-neutral-300" />
-                        </div>
-                        <h4 className="mb-1 text-sm font-medium text-neutral-900 dark:text-neutral-50">
-                          Compute Engine
-                        </h4>
-                        <p className="mb-3 text-sm tracking-tight text-neutral-500 dark:text-neutral-400">
-                          Train and deploy models with infinite scale
-                          infrastructure.
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          <Button
-                            variant="outline"
-                            className="h-7 gap-1.5 rounded-xl px-3 text-xs text-neutral-700 dark:text-neutral-300"
-                          >
-                            <Layers className="h-3.5 w-3.5" />
-                            Pipelines
-                          </Button>
-                          <Button
-                            variant="outline"
-                            className="h-7 gap-1.5 rounded-xl px-3 text-xs text-neutral-700 dark:text-neutral-300"
-                          >
-                            <GitBranch className="h-3.5 w-3.5" />
-                            Webhooks
-                          </Button>
-                          <Button
-                            variant="outline"
-                            className="h-7 gap-1.5 rounded-xl px-3 text-xs text-neutral-700 dark:text-neutral-300"
-                          >
-                            <Terminal className="h-3.5 w-3.5" />
-                            CLI Tool
-                          </Button>
-                        </div>
-                      </div>
-
-                      {/* Column 2 */}
-                      <div className="flex flex-col gap-3 pl-6">
-                        <h4 className="mb-1 text-xs text-neutral-400 uppercase dark:text-neutral-500">
-                          Use Cases
-                        </h4>
-                        <a
-                          href="#"
-                          className="text-sm font-medium tracking-tight text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-50"
-                        >
-                          Fraud Detection
-                        </a>
-                        <a
-                          href="#"
-                          className="text-sm font-medium tracking-tight text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-50"
-                        >
-                          Personalized Search
-                        </a>
-                        <a
-                          href="#"
-                          className="text-sm font-medium tracking-tight text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-50"
-                        >
-                          Predictive Analytics
-                        </a>
-                        <a
-                          href="#"
-                          className="text-sm font-medium tracking-tight text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-50"
-                        >
-                          LLM Gateways
-                        </a>
-                      </div>
-
-                      {/* Column 3 */}
-                      <div className="flex flex-col gap-3 pl-6">
-                        <h4 className="mb-1 text-xs text-neutral-400 uppercase dark:text-neutral-500">
-                          Resources
-                        </h4>
-                        <a
-                          href="#"
-                          className="text-sm font-medium tracking-tight text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-50"
-                        >
-                          Documentation
-                        </a>
-                        <a
-                          href="#"
-                          className="text-sm font-medium tracking-tight text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-50"
-                        >
-                          API Reference
-                        </a>
-                        <a
-                          href="#"
-                          className="text-sm font-medium tracking-tight text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-50"
-                        >
-                          System Status
-                        </a>
-                      </div>
-
-                      {/* Column 4 */}
-                      <div className="flex flex-col pl-6">
-                        <h4 className="mb-4 text-xs text-neutral-400 uppercase dark:text-neutral-500">
-                          Featured
-                        </h4>
-                        <a
-                          href="#"
-                          className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl p-6 ring ring-orange-500/50 transition-all"
-                        >
-                          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-transparent to-transparent group-hover:opacity-100 dark:from-orange-500/10" />
-                          <div className="absolute inset-0 -z-10 bg-neutral-100 dark:bg-neutral-900" />
-
-                          <div>
-                            <Badge
-                              variant="outline"
-                              className="mb-3 border-orange-200 bg-white text-orange-600 dark:border-orange-900 dark:bg-neutral-950 dark:text-orange-400"
-                            >
-                              Upcoming Webinar
-                            </Badge>
-                            <h4 className="mb-2 text-sm font-semibold text-neutral-900 dark:text-neutral-50">
-                              Building scalable AI pipelines
-                            </h4>
-                            <p className="text-sm tracking-tight text-neutral-600 dark:text-neutral-400">
-                              Join our engineers for a live teardown of the new
-                              Compute Engine architecture.
-                            </p>
-                          </div>
-
-                          <div className="mt-4 flex items-center text-sm font-medium text-orange-600 dark:text-orange-400">
-                            Register now{' '}
-                            <ArrowUpRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    className="rounded-xl bg-transparent px-4 py-2 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-50"
-                    href="#"
-                  >
-                    Customers
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    className="rounded-xl bg-transparent px-4 py-2 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-50"
-                    href="#"
-                  >
-                    Enterprise
+                    <LayoutDashboard className="h-4 w-4 text-slate-400" />
+                    Dashboard
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               </NavigationMenuList>
@@ -256,25 +64,23 @@ export function Navigation5() {
 
           {/* Action Icons Section */}
           <div className="flex items-center gap-2">
-            <div className="flex hidden items-center gap-1 md:flex">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="rounded-xl text-neutral-500 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-800"
-              >
-                <Command className="h-4 w-4.5" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="rounded-xl text-neutral-500 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-800"
-              >
-                <User className="h-4 w-4.5" />
-              </Button>
+            <div className="hidden items-center gap-2 md:flex">
+              <Link href="/auth/sign-in">
+                <Button
+                  variant="ghost"
+                  className="rounded-xl text-neutral-600 hover:bg-neutral-100 dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white font-medium"
+                >
+                  <User className="h-4 w-4 mr-2" />
+                  Sign In
+                </Button>
+              </Link>
             </div>
-            <Button className="hidden rounded-xl bg-orange-600 px-6 font-semibold text-white hover:bg-orange-700 md:block dark:bg-orange-600 dark:hover:bg-orange-700">
-              Get started
-            </Button>
+            <Link href="/estimate">
+              <Button className="hidden rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 px-6 font-bold text-slate-950 hover:brightness-110 shadow-[0_0_14px_rgba(245,158,11,0.25)] md:flex dark:text-slate-950">
+                Estimate Now
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            </Link>
 
             {/* Mobile Menu Trigger */}
             <div className="lg:hidden">
@@ -290,118 +96,47 @@ export function Navigation5() {
                 </SheetTrigger>
                 <SheetContent
                   side="right"
-                  className="flex w-[300px] flex-col gap-6 p-6 dark:bg-neutral-950"
+                  className="flex w-[300px] flex-col gap-6 p-6 dark:bg-[#070A11] dark:border-white/10"
                 >
                   <div className="flex items-center gap-2">
-                    <div className="flex h-8 w-8 items-center justify-center text-orange-600 dark:text-orange-500">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="h-6 w-6 fill-current"
-                      >
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                      </svg>
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-amber-500 to-amber-400 text-slate-950 shadow-[0_0_12px_rgba(245,158,11,0.3)]">
+                      <Sun className="h-5 w-5" />
                     </div>
-                    <span className="text-lg font-bold text-neutral-900 dark:text-white">
-                      Watermelon
+                    <span className="text-lg font-extrabold text-neutral-900 dark:text-white">
+                      Sol<span className="text-amber-400">Optimizer</span>
                     </span>
                   </div>
 
                   <div className="flex flex-col gap-4">
-                    <a
-                      href="#"
-                      className="text-base font-medium text-neutral-900 dark:text-neutral-50"
+                    <Link
+                      href="/estimate"
+                      className="flex items-center gap-2 text-base font-medium text-neutral-900 dark:text-slate-200"
                     >
-                      Features
-                    </a>
-                    <div className="flex items-center justify-between">
-                      <a
-                        href="#"
-                        className="text-base font-medium text-neutral-900 dark:text-neutral-50"
-                      >
-                        Developers
-                      </a>
-                      <Badge
-                        variant="secondary"
-                        className="bg-orange-100 text-orange-600 dark:bg-orange-500/20 dark:text-orange-400"
-                      >
-                        API
-                      </Badge>
-                    </div>
-
-                    <Accordion type="single" collapsible className="w-full">
-                      <AccordionItem value="solutions" className="border-none">
-                        <AccordionTrigger className="justify-between py-0 text-base font-medium text-neutral-900 hover:no-underline dark:text-neutral-50">
-                          Solutions
-                        </AccordionTrigger>
-                        <AccordionContent className="mt-1 ml-2 flex !h-auto flex-col gap-3 border-l border-neutral-200 pb-0 pl-4 text-base font-medium dark:border-neutral-800 [&_a]:no-underline">
-                          <div className="flex flex-col gap-2 pt-4">
-                            <span className="text-xs text-neutral-400 uppercase">
-                              Infrastructure
-                            </span>
-                            <a
-                              href="#"
-                              className="text-sm font-medium tracking-tight text-neutral-600 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400"
-                            >
-                              Compute Engine
-                            </a>
-                            <a
-                              href="#"
-                              className="text-sm font-medium tracking-tight text-neutral-600 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400"
-                            >
-                              System Status
-                            </a>
-                          </div>
-                          <div className="mt-2 flex flex-col gap-2">
-                            <span className="text-xs text-neutral-400 uppercase">
-                              Use Cases
-                            </span>
-                            <a
-                              href="#"
-                              className="text-sm font-medium tracking-tight text-neutral-600 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400"
-                            >
-                              Fraud Detection
-                            </a>
-                            <a
-                              href="#"
-                              className="text-sm font-medium tracking-tight text-neutral-600 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400"
-                            >
-                              Predictive Analytics
-                            </a>
-                            <a
-                              href="#"
-                              className="text-sm font-medium tracking-tight text-neutral-600 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400"
-                            >
-                              LLM Gateways
-                            </a>
-                          </div>
-                        </AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
-
-                    <a
-                      href="#"
-                      className="text-base font-medium text-neutral-900 dark:text-neutral-50"
+                      <Calculator className="h-5 w-5 text-amber-400" />
+                      Estimator
+                    </Link>
+                    <Link
+                      href="/dashboard"
+                      className="flex items-center gap-2 text-base font-medium text-neutral-900 dark:text-slate-200"
                     >
-                      Customers
-                    </a>
-                    <a
-                      href="#"
-                      className="text-base font-medium text-neutral-900 dark:text-neutral-50"
+                      <LayoutDashboard className="h-5 w-5 text-slate-400" />
+                      Dashboard
+                    </Link>
+                    <Link
+                      href="/auth/sign-in"
+                      className="flex items-center gap-2 text-base font-medium text-neutral-900 dark:text-slate-200"
                     >
-                      Enterprise
-                    </a>
+                      <User className="h-5 w-5 text-slate-400" />
+                      Sign In
+                    </Link>
                   </div>
 
                   <div className="mt-auto flex flex-col gap-3">
-                    <Button className="w-full rounded-xl bg-orange-600 text-white hover:bg-orange-700">
-                      Get started
-                    </Button>
+                    <Link href="/estimate">
+                      <Button className="w-full rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 hover:brightness-110 font-bold">
+                        Estimate Now
+                      </Button>
+                    </Link>
                   </div>
                 </SheetContent>
               </Sheet>
